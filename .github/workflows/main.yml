@@ -12,10 +12,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up Buildozer with Docker
+       - name: Set up Buildozer with Docker
       run: |
         docker pull kivy/buildozer
+        docker run --rm -v ${{ github.workspace }}:/app -w /app kivy/buildozer ls -la
         docker run --rm -v ${{ github.workspace }}:/app -w /app kivy/buildozer buildozer android debug
+
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
